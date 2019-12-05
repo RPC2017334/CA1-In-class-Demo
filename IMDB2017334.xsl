@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <xsl:for-each select="/IMDB/section">
+                        <xsl:for-each select="/moviemenu/section">
                             <tr>
                                 <td colspan="2">
                                     <xsl:value-of select="@name" />
