@@ -11,19 +11,19 @@
                             <th>Select</th>
                             <th>title</th>
                             <th>year</th>
-                            <th>gender</th>>
+                            <th>gender</th>
                             <th>director</th>
                         </tr>
                     </thead>
                     <tbody>
                         <xsl:for-each select="/IMDB/section">
                             <tr>
-                                <td colspan="5">
+                                <td colspan="2">
                                     <xsl:value-of select="@name" />
                                 </td>
                             </tr>
                             <xsl:for-each select="movie" >
-                            <tr id="{position()}">>
+                            <tr id="{position()}">
                                 <td align="center">
                                     <input name="item0" type="checkbox" />
                                 </td>

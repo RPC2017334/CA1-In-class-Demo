@@ -86,6 +86,9 @@ router.post('/post/delete', function(req, res) {
     // Function to read in XML file, convert it to JSON, delete the required object and write back to XML file
     xmlFileToJs('IMDB2017334.xml', function(err, result) {
       if (err) throw (err);
+
+      console.log(obj);
+      
       //This is where we delete the object based on the position of the section and position of the entree, as being passed on from index.html
       delete result.IMDB.section[obj.section].movie[obj.movie];
       //This is where we convert from JSON and write back our XML file
