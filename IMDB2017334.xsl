@@ -18,7 +18,7 @@
                     <tbody>
                         <xsl:for-each select="/moviemenu/section">
                             <tr>
-                                <td colspan="2">
+                                <td colspan="1">
                                     <xsl:value-of select="@name" />
                                 </td>
                             </tr>

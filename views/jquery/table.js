@@ -24,7 +24,7 @@ function select_row()
 	{
 		$(".selected").removeClass("selected");
 		$(this).addClass("selected");
-		var section = $(this).prevAll("tr").children("td[colspan='2']").length - 1;
+		var section = $(this).prevAll("tr").children("td[colspan='1']").length - 1;
 		var movie = $(this).attr("id") - 1;
 		delete_row(section, movie);
 	})
