@@ -4,7 +4,8 @@ var http = require('http'), //This module provides the HTTP server functionaliti
     fs = require('fs'), //This module allows to work witht the file system: read and write files back
     xmlParse = require('xslt-processor').xmlParse, //This module allows us to work with XML files
     xsltProcess = require('xslt-processor').xsltProcess, //The same module allows us to utilise XSL Transformations
-    xml2js = require('xml2js'); //This module does XML to JSON conversion and also allows us to get from JSON back to XML
+    xml2js = require('xml2js'), //This module does XML to JSON conversion and also allows us to get from JSON back to XML
+    expAutoSan = require('express-autosanitizer');
 
 var router = express(); //The set our routing to be handled by Express
 var server = http.createServer(router); //This is where our server gets created
@@ -12,7 +13,7 @@ var server = http.createServer(router); //This is where our server gets created
 router.use(express.static(path.resolve(__dirname, 'views'))); //We define the views folder as the one where all static content will be served
 router.use(express.urlencoded({extended: true})); //We allow the data sent from the client to be coming in as part of the URL in GET and POST requests
 router.use(express.json()); //We include support for JSON that is coming from the client
-
+router.use(expAutoSan.allUnsafe);
 // Function to read in XML file and convert it to JSON
 function xmlFileToJs(filename, cb) {
   var filepath = path.normalize(path.join(__dirname, filename));
@@ -40,8 +41,8 @@ router.get('/get/html', function(req, res) {
 
     res.writeHead(200, {'Content-Type': 'text/html'}); //We are responding to the client that the content served back is HTML and the it exists (code 200)
 
-    var xml = fs.readFileSync('PaddysCafe.xml', 'utf8'); //We are reading in the XML file
-    var xsl = fs.readFileSync('PaddysCafe.xsl', 'utf8'); //We are reading in the XSL file
+    var xml = fs.readFileSync('IMDB2017334.xml', 'utf8'); //We are reading in the XML file
+    var xsl = fs.readFileSync('IMDB2017334.xsl', 'utf8'); //We are reading in the XSL file
     var doc = xmlParse(xml); //Parsing our XML file
     var stylesheet = xmlParse(xsl); //Parsing our XSL file
 
@@ -58,12 +59,12 @@ router.post('/post/json', function(req, res) {
   // Function to read in a JSON file, add to it & convert to XML
   function appendJSON(obj) {
     // Function to read in XML file, convert it to JSON, add a new object and write back to XML file
-    xmlFileToJs('PaddysCafe.xml', function(err, result) {
+    xmlFileToJs('IMDB2017334.xml', function(err, result) {
       if (err) throw (err);
       //This is where you pass on information from the form inside index.html in a form of JSON and navigate through our JSON (XML) file to create a new entree object
-      result.cafemenu.section[obj.sec_n].entree.push({'item': obj.item, 'price': obj.price}); //If your XML elements are differet, this is where you have to change to your own element names
-      //Converting back to our original XML file from JSON
-      jsToXmlFile('PaddysCafe.xml', result, function(err) {
+      result.IMDB.section[obj.sec_n].movie.push({'title': obj.title, 'year': obj.year, 'genres': obj.genres, 'director': obj.director}); //If your XML elements are differet, this is where you have to change to your own element names
+      console.log(result);
+      jsToXmlFile('IMDB2017334.xml', result, function(err) {
         if (err) console.log(err);
       })
     })
@@ -83,19 +84,18 @@ router.post('/post/delete', function(req, res) {
   // Function to read in a JSON file, add to it & convert to XML
   function deleteJSON(obj) {
     // Function to read in XML file, convert it to JSON, delete the required object and write back to XML file
-    xmlFileToJs('PaddysCafe.xml', function(err, result) {
+    xmlFileToJs('IMDB2017334.xml', function(err, result) {
       if (err) throw (err);
       //This is where we delete the object based on the position of the section and position of the entree, as being passed on from index.html
-      delete result.cafemenu.section[obj.section].entree[obj.entree];
+      delete result.IMDB.section[obj.section].movie[obj.movie];
       //This is where we convert from JSON and write back our XML file
-      jsToXmlFile('PaddysCafe.xml', result, function(err) {
+      jsToXmlFile('IMDB2017334.xml', result, function(err) {
         if (err) console.log(err);
       })
     })
   }
 
-  // Call appendJSON function and pass in body of the current POST request
-  deleteJSON(req.body);
+  // Call appendJSON function and pass in body of t    cxc     cxz    (req.body);
 
 });
 
