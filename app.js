@@ -62,6 +62,7 @@ router.post('/post/json', function(req, res) {
     // Function to read in XML file, convert it to JSON, add a new object and write back to XML file
     xmlFileToJs('IMDB2017334.xml', function(err, result) {
       if (err) throw (err);
+      
       //This is where you pass on information from the form inside index.html in a form of JSON and navigate through our JSON (XML) file to create a new entree object
       result.moviemenu.section[obj.sec_n].movie.push({'title': obj.title, 'year': obj.year, 'genres': obj.genres, 'director': obj.director}); //If your XML elements are differet, this is where you have to change to your own element names
       console.log(result);
@@ -81,9 +82,11 @@ router.post('/post/json', function(req, res) {
 
 // POST request to add to JSON & XML files
 router.post('/post/delete', function(req, res) {
-
+    console.log("cheguei")
   // Function to read in a JSON file, add to it & convert to XML
-  function deleteJSON(obj) {
+  function deleteJSON(obj) { 
+      console.log(obj);
+    console.log("Qual l'e")
     // Function to read in XML file, convert it to JSON, delete the required object and write back to XML file
     xmlFileToJs('IMDB2017334.xml', function(err, result) {
       if (err) throw (err);
@@ -91,7 +94,7 @@ router.post('/post/delete', function(req, res) {
       console.log(obj);
 
       //This is where we delete the object based on the position of the section and position of the entree, as being passed on from index.html
-      delete result.moviemenu.section[obj.section].movie[obj.movie];
+      delete result.moviemenu.section[obj.section].movie[obj.movies];
       //This is where we convert from JSON and write back our XML file
       jsToXmlFile('IMDB2017334.xml', result, function(err) {
         if (err) console.log(err);
@@ -99,7 +102,8 @@ router.post('/post/delete', function(req, res) {
     })
   }
 
-  // Call appendJSON function and pass in body of t    cxc     cxz    (req.body);
+  // Call adeleteJSON function and pass in body of the current POST request
+  deleteJSON(req.body);
 
 });
 

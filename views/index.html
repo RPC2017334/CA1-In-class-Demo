@@ -14,7 +14,7 @@
 
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffb3b3;" static-top">
 		<div class="container">	<a class="navbar-brand" href="#">IMDB Top 20</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">	<span class="navbar-toggler-icon"></span>
 			</button>
@@ -37,7 +37,7 @@
 			</div>
 			<div id="results" class="col-lg-8 text-center order-3"></div>
 			<div class="col-lg-4 text-center order-2">
-				<form enctype="application/json" action="/post/json" method="post">
+				<form name="imdbForm" enctype="application/json" action="/post/json" onsubmit="return validateForm()" method="post">
 					<div class="form-group">
 						<select class="form-control" name="sec_n">
 							<option value="0">Top20</option>
@@ -48,7 +48,7 @@
 						<input class="form-control" type="text" name="title" placeholder="title">
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" name="year" placeholder="year">
+						<input class="form-control" type="number" name="year" placeholder="year">
 					</div>
                     <div class="form-group">
 						<input class="form-control" type="text" name="genres" placeholder="genres">
@@ -56,14 +56,14 @@
                     <div class="form-group">
 						<input class="form-control" type="text" name="director" placeholder="director">
 					</div>
-					<button type="submit" class="btn btn-primary btn-block">Submit</button>
+					<button type="submit" style="background-color: #ffcccc;" class="btn btn-primary btn-block">Submit</button>
 				</form>
                     <button id="delete" class="btn btn-block btn-danger">Delete</button>
                     <p class="text-muted">To delete a movie record, click the required row first</p>
 			</div>
 		</div>
 	</div>
-	<footer class="footer">
+	<footer class="footer" style="background-color: #ffcccc;">
 		<div class="container">	<span class="text-muted">&copy; 2019</span>
 		</div>
 	</footer>

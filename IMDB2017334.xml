@@ -2,12 +2,6 @@
 <moviemenu>
   <section name="Top20">
     <movie>
-      <title>The Shawshank Redemption </title>
-      <year>1994</year>
-      <genres>Drama</genres>
-      <director>Frank Darabont</director>
-    </movie>
-    <movie>
       <title>The Godfather</title>
       <year>1972</year>
       <genres>Crime, Drama</genres>
@@ -127,6 +121,12 @@
       <genres>comedy</genres>
       <director>xxx</director>
     </movie>
+    <movie>
+      <title>cvbfgng</title>
+      <year>cghkhjk</year>
+      <genres/>
+      <director/>
+    </movie>
   </section>
   <section name="Animation">
     <movie>
@@ -152,6 +152,12 @@
       <year>1988</year>
       <genres>Animation, Drama, War</genres>
       <director>Isao Takahata</director>
+    </movie>
+    <movie>
+      <title/>
+      <year/>
+      <genres/>
+      <director/>
     </movie>
   </section>
 </moviemenu>
